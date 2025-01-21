@@ -1,8 +1,13 @@
 :root {
-    --primary-color: #2563eb;
-    --text-color: #1f2937;
+    --primary-color: #FF3366;
+    --secondary-color: #00E5FF;
+    --accent-color: #FFB300;
+    --text-color: #2A2A2A;
     --background-color: #ffffff;
-    --secondary-background: #f3f4f6;
+    --secondary-background: #f8f9fa;
+    --gradient-1: linear-gradient(135deg, #FF3366, #FF6B6B);
+    --gradient-2: linear-gradient(135deg, #00E5FF, #2979FF);
+    --box-shadow: 0 8px 32px rgba(0,0,0,0.1);
 }
 
 * {
@@ -15,12 +20,13 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--background-color);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
 }
 
 header {
-    background-color: var(--background-color);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--box-shadow);
     position: fixed;
     width: 100%;
     top: 0;
@@ -37,9 +43,12 @@ nav {
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 nav ul {
@@ -49,14 +58,26 @@ nav ul {
 }
 
 nav a {
+    position: relative;
     text-decoration: none;
     color: var(--text-color);
-    font-weight: 500;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
-nav a:hover, nav a.active {
-    color: var(--primary-color);
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background: var(--gradient-1);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after, nav a.active::after {
+    width: 100%;
 }
 
 main {
@@ -65,23 +86,36 @@ main {
 }
 
 .hero {
-    text-align: center;
-    padding: 4rem 2rem;
-    background-color: var(--secondary-background);
-    margin-bottom: 2rem;
+    background: var(--gradient-2);
+    color: white;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='rgba(255,255,255,0.1)' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.6;
 }
 
 .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: var(--text-color);
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .hero p {
     font-size: 1.25rem;
-    color: #4b5563;
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
+    opacity: 0.9;
 }
 
 .portfolio {
@@ -104,15 +138,19 @@ main {
 }
 
 .campaign-header {
-    margin-top: 2rem;
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 0.5rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    position: relative;
 }
 
 .campaign-header h3 {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
 .campaign-container {
@@ -124,17 +162,16 @@ main {
 
 .portfolio-item {
     background: white;
-    border-radius: 8px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
+    box-shadow: var(--box-shadow);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0);
 }
 
 .portfolio-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 48px rgba(0,0,0,0.15);
 }
 
 .portfolio-item video,
@@ -190,55 +227,53 @@ main {
 }
 
 .portfolio-item-metadata {
-    padding: 1rem;
+    padding: 1.25rem;
     background: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.portfolio-item-metadata h3 {
-    margin: 0;
-    color: var(--primary-color);
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.portfolio-item-metadata p {
-    margin: 0;
-    color: #6b7280;
-    font-size: 0.9rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
 }
 
 .portfolio-item-metadata .dimensions {
     font-weight: 600;
     color: var(--text-color);
+    font-size: 0.9rem;
 }
 
 .portfolio-item-metadata .format {
     color: var(--primary-color);
     font-size: 0.8rem;
-    font-weight: 500;
+    font-weight: 600;
+    padding: 4px 12px;
+    background: rgba(255, 51, 102, 0.1);
+    border-radius: 20px;
 }
 
 footer {
+    background: var(--secondary-background);
+    padding: 3rem;
+    margin-top: 6rem;
     text-align: center;
-    padding: 2rem;
-    background-color: var(--secondary-background);
-    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
 }
 
 @media (max-width: 768px) {
     .hero h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
     
     .hero p {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
     
-    .campaign-container {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    .campaign-header h3 {
+        font-size: 1.75rem;
+    }
+    
+    .about-container {
+        padding: 2rem;
     }
 }
 
@@ -249,10 +284,22 @@ footer {
 }
 
 .about-container {
-    background-color: white;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background: white;
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: var(--box-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: var(--gradient-1);
 }
 
 .about-container h2 {
