@@ -116,9 +116,10 @@ main {
 }
 
 .campaign-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
+    justify-content: center;
 }
 
 .portfolio-item {
@@ -129,6 +130,7 @@ main {
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    width: fit-content;
 }
 
 .portfolio-item:hover {
@@ -137,11 +139,35 @@ main {
 
 .portfolio-item video,
 .portfolio-item img {
-    width: 100%;
-    height: auto;
     display: block;
-    object-fit: contain;
+    width: auto;
+    height: auto;
     background-color: #f3f4f6;
+}
+
+/* Size-specific styles */
+.size-728x90 {
+    width: 728px;
+}
+
+.size-300x250, .size-320x50, .size-300x50 {
+    width: 300px;
+}
+
+.size-300x600 {
+    width: 300px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .portfolio-item {
+        width: 100% !important; /* Override size-specific widths */
+    }
+
+    .portfolio-item img {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .portfolio-item-metadata {

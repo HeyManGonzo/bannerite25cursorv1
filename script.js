@@ -46,13 +46,15 @@ async function loadPortfolioItems() {
             // Add ads for this client
             ads.forEach(ad => {
                 const portfolioItem = document.createElement('div');
-                portfolioItem.className = 'portfolio-item';
+                portfolioItem.className = `portfolio-item size-${ad.dimensions.replace('x', 'x')}`;
 
                 const isGif = ad.type === 'gif';
                 const element = document.createElement('img');
                 
                 element.src = `/ads/${ad.file}`;
                 element.alt = `${ad.client} - ${ad.dimensions} Banner Ad`;
+                element.width = ad.dimensions.split('x')[0];
+                element.height = ad.dimensions.split('x')[1];
 
                 // Add metadata
                 const metadata = document.createElement('div');
