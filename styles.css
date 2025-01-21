@@ -109,6 +109,8 @@ main {
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .portfolio-item:hover {
@@ -120,6 +122,26 @@ main {
     width: 100%;
     height: auto;
     display: block;
+    object-fit: contain;
+    background-color: #f3f4f6;
+}
+
+.portfolio-item-metadata {
+    padding: 1rem;
+    background: white;
+}
+
+.portfolio-item-metadata h3 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.portfolio-item-metadata p {
+    margin: 0.5rem 0 0;
+    color: #6b7280;
+    font-size: 0.9rem;
 }
 
 footer {

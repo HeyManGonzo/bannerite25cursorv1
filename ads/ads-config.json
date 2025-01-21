@@ -1,0 +1,64 @@
+{
+  "ads": [
+    {
+      "file": "en_300x250_AceShawarma_ButterChcikenTacos_aug2024_v1.jpg",
+      "type": "image",
+      "dimensions": "300x250",
+      "client": "Ace Shawarma"
+    },
+    {
+      "file": "en_300x250_AshleyFurniture_nov2024_v2.gif",
+      "type": "gif",
+      "dimensions": "300x250",
+      "client": "Ashley Furniture"
+    },
+    {
+      "file": "en_300x50_AceShawarma_ButterChickenTaco_aug2024_v1.jpg",
+      "type": "image",
+      "dimensions": "300x50",
+      "client": "Ace Shawarma"
+    },
+    {
+      "file": "en_300x50_AshleyFurniture_nov2024_v2.gif",
+      "type": "gif",
+      "dimensions": "300x50",
+      "client": "Ashley Furniture"
+    },
+    {
+      "file": "en_300x600_AceShawarma_ButterChcikenTacos_aug2024_v1.jpg",
+      "type": "image",
+      "dimensions": "300x600",
+      "client": "Ace Shawarma"
+    },
+    {
+      "file": "en_300x600_AshleyFurniture_nov2024_v2.gif",
+      "type": "gif",
+      "dimensions": "300x600",
+      "client": "Ashley Furniture"
+    },
+    {
+      "file": "en_320x50_AceShawarma_ButterChcikenTacos_aug2024_v1.jpg",
+      "type": "image",
+      "dimensions": "320x50",
+      "client": "Ace Shawarma"
+    },
+    {
+      "file": "en_320x50_AshleyFurniture_nov2024_v2.gif",
+      "type": "gif",
+      "dimensions": "320x50",
+      "client": "Ashley Furniture"
+    },
+    {
+      "file": "en_728x90_AceShawarma_ButterChcikenTacos_aug2024_v1.jpg",
+      "type": "image",
+      "dimensions": "728x90",
+      "client": "Ace Shawarma"
+    },
+    {
+      "file": "en_728x90_AshleyFurniture_nov2024_v2.gif",
+      "type": "gif",
+      "dimensions": "728x90",
+      "client": "Ashley Furniture"
+    }
+  ]
+} 

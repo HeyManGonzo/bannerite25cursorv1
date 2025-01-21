@@ -6,38 +6,34 @@ async function loadPortfolioItems() {
     const portfolioGrid = document.getElementById('portfolio-grid');
     
     try {
-        const response = await fetch('/ads/');
-        const files = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(files, 'text/html');
-        const links = Array.from(doc.querySelectorAll('a'))
-            .filter(a => a.href.match(/\.(gif|mp4)$/i));
-
-        links.forEach(link => {
-            const fileName = link.href.split('/').pop();
-            const fileExtension = fileName.split('.').pop().toLowerCase();
+        const response = await fetch('/ads/ads-config.json');
+        const data = await response.json();
+        
+        data.ads.forEach(ad => {
             const portfolioItem = document.createElement('div');
             portfolioItem.className = 'portfolio-item';
 
-            if (fileExtension === 'mp4') {
-                const video = document.createElement('video');
-                video.src = `/ads/${fileName}`;
-                video.controls = true;
-                video.autoplay = false;
-                video.muted = true;
-                video.loop = true;
-                portfolioItem.appendChild(video);
-
-                // Play video on hover
-                portfolioItem.addEventListener('mouseenter', () => video.play());
-                portfolioItem.addEventListener('mouseleave', () => video.pause());
+            const isGif = ad.type === 'gif';
+            const element = document.createElement(isGif ? 'img' : 'img');
+            
+            if (isGif) {
+                element.src = `/ads/${ad.file}`;
+                element.alt = `${ad.client} - ${ad.dimensions} Banner Ad`;
             } else {
-                const img = document.createElement('img');
-                img.src = `/ads/${fileName}`;
-                img.alt = `Banner ad - ${fileName}`;
-                portfolioItem.appendChild(img);
+                element.src = `/ads/${ad.file}`;
+                element.alt = `${ad.client} - ${ad.dimensions} Banner Ad`;
             }
 
+            // Add metadata
+            const metadata = document.createElement('div');
+            metadata.className = 'portfolio-item-metadata';
+            metadata.innerHTML = `
+                <h3>${ad.client}</h3>
+                <p>${ad.dimensions}</p>
+            `;
+
+            portfolioItem.appendChild(element);
+            portfolioItem.appendChild(metadata);
             portfolioGrid.appendChild(portfolioItem);
         });
     } catch (error) {
