@@ -48,8 +48,26 @@ async function loadPortfolioItems() {
                 const portfolioItem = document.createElement('div');
                 portfolioItem.className = `portfolio-item size-${ad.dimensions.replace('x', 'x')}`;
 
-                const isGif = ad.type === 'gif';
-                const element = document.createElement('img');
+                let element;
+                if (ad.type === 'video') {
+                    element = document.createElement('video');
+                    element.controls = true;
+                    element.muted = true;
+                    element.loop = true;
+                    element.preload = 'metadata';
+                    
+                    // Add poster if needed
+                    // element.poster = '/path/to/poster.jpg';
+                    
+                    // Play/pause on hover for videos
+                    portfolioItem.addEventListener('mouseenter', () => element.play());
+                    portfolioItem.addEventListener('mouseleave', () => {
+                        element.pause();
+                        element.currentTime = 0;
+                    });
+                } else {
+                    element = document.createElement('img');
+                }
                 
                 element.src = `/ads/${ad.file}`;
                 element.alt = `${ad.client} - ${ad.dimensions} Banner Ad`;

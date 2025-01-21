@@ -1,6 +1,18 @@
 {
   "ads": [
     {
+      "file": "en_1920x1080_FrontierMitsubishi_sep2024_v3.mp4",
+      "type": "video",
+      "dimensions": "1920x1080",
+      "client": "Frontier Mitsubishi"
+    },
+    {
+      "file": "en_1920x1080_FrontierMitshubishi_May_Video1_v1.mp4",
+      "type": "video",
+      "dimensions": "1920x1080",
+      "client": "Frontier Mitsubishi"
+    },
+    {
       "file": "en_300x250_AceShawarma_ButterChcikenTacos_aug2024_v1.jpg",
       "type": "image",
       "dimensions": "300x250",

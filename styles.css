@@ -146,6 +146,12 @@ main {
 }
 
 /* Size-specific styles */
+.size-1920x1080 {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .size-728x90 {
     width: 728px;
 }
@@ -158,13 +164,26 @@ main {
     width: 300px;
 }
 
+.portfolio-item video {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
 /* Responsive adjustments */
+@media (max-width: 1240px) {
+    .size-1920x1080 {
+        max-width: 100%;
+    }
+}
+
 @media (max-width: 768px) {
     .portfolio-item {
         width: 100% !important; /* Override size-specific widths */
     }
 
-    .portfolio-item img {
+    .portfolio-item img,
+    .portfolio-item video {
         width: 100%;
         height: auto;
     }
