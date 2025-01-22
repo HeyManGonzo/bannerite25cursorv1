@@ -13,8 +13,8 @@ async function createPosterFromVideo(video) {
 
         // When video can play, capture a frame
         video.addEventListener('loadeddata', () => {
-            // Seek to 1 second or video duration if shorter
-            const seekTime = Math.min(1.0, video.duration);
+            // Seek to 0.5 seconds before the end
+            const seekTime = Math.max(0, video.duration - 0.5);
             video.currentTime = seekTime;
         });
 
@@ -83,12 +83,6 @@ async function loadPortfolioItems() {
                     element.preload = 'metadata';
                     element.src = `/ads/${ad.file}`;
                     
-                    // Create loading overlay
-                    const loadingOverlay = document.createElement('div');
-                    loadingOverlay.className = 'video-loading-overlay';
-                    loadingOverlay.innerHTML = '<div class="loading-spinner"></div>';
-                    portfolioItem.appendChild(loadingOverlay);
-
                     // Generate poster image automatically
                     try {
                         const posterDataUrl = await createPosterFromVideo(element);
@@ -96,11 +90,6 @@ async function loadPortfolioItems() {
                     } catch (err) {
                         console.error('Error creating poster:', err);
                     }
-
-                    // Handle video loading states
-                    element.addEventListener('loadeddata', () => {
-                        loadingOverlay.style.display = 'none';
-                    });
                     
                     // Play/pause on hover for videos
                     portfolioItem.addEventListener('mouseenter', () => {
