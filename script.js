@@ -2,6 +2,32 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPortfolioItems();
 });
 
+// Function to capture video frame and create poster
+async function createPosterFromVideo(video) {
+    return new Promise((resolve) => {
+        // Create canvas to capture video frame
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext('2d');
+
+        // When video can play, capture a frame
+        video.addEventListener('loadeddata', () => {
+            // Seek to 1 second or video duration if shorter
+            const seekTime = Math.min(1.0, video.duration);
+            video.currentTime = seekTime;
+        });
+
+        video.addEventListener('seeked', () => {
+            // Draw video frame to canvas
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            // Convert canvas to data URL
+            const posterDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+            resolve(posterDataUrl);
+        });
+    });
+}
+
 async function loadPortfolioItems() {
     const portfolioGrid = document.getElementById('portfolio-grid');
     
@@ -44,7 +70,7 @@ async function loadPortfolioItems() {
             campaignContainer.className = 'campaign-container';
 
             // Add ads for this client
-            ads.forEach(ad => {
+            ads.forEach(async (ad) => {
                 const portfolioItem = document.createElement('div');
                 portfolioItem.className = `portfolio-item size-${ad.dimensions.replace('x', 'x')}`;
 
@@ -55,17 +81,21 @@ async function loadPortfolioItems() {
                     element.muted = true;
                     element.loop = true;
                     element.preload = 'metadata';
+                    element.src = `/ads/${ad.file}`;
                     
-                    // Add poster if available
-                    if (ad.poster) {
-                        element.poster = `/ads/${ad.poster}`;
-                    }
-
                     // Create loading overlay
                     const loadingOverlay = document.createElement('div');
                     loadingOverlay.className = 'video-loading-overlay';
                     loadingOverlay.innerHTML = '<div class="loading-spinner"></div>';
                     portfolioItem.appendChild(loadingOverlay);
+
+                    // Generate poster image automatically
+                    try {
+                        const posterDataUrl = await createPosterFromVideo(element);
+                        element.poster = posterDataUrl;
+                    } catch (err) {
+                        console.error('Error creating poster:', err);
+                    }
 
                     // Handle video loading states
                     element.addEventListener('loadeddata', () => {
@@ -74,7 +104,9 @@ async function loadPortfolioItems() {
                     
                     // Play/pause on hover for videos
                     portfolioItem.addEventListener('mouseenter', () => {
-                        element.play().catch(err => console.log('Playback prevented:', err));
+                        if (element.readyState >= 3) { // Check if video data is loaded
+                            element.play().catch(err => console.log('Playback prevented:', err));
+                        }
                     });
                     portfolioItem.addEventListener('mouseleave', () => {
                         element.pause();
@@ -82,9 +114,9 @@ async function loadPortfolioItems() {
                     });
                 } else {
                     element = document.createElement('img');
+                    element.src = `/ads/${ad.file}`;
                 }
                 
-                element.src = `/ads/${ad.file}`;
                 element.alt = `${ad.client} - ${ad.dimensions} Banner Ad`;
                 element.width = ad.dimensions.split('x')[0];
                 element.height = ad.dimensions.split('x')[1];
