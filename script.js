@@ -56,11 +56,26 @@ async function loadPortfolioItems() {
                     element.loop = true;
                     element.preload = 'metadata';
                     
-                    // Add poster if needed
-                    // element.poster = '/path/to/poster.jpg';
+                    // Add poster if available
+                    if (ad.poster) {
+                        element.poster = `/ads/${ad.poster}`;
+                    }
+
+                    // Create loading overlay
+                    const loadingOverlay = document.createElement('div');
+                    loadingOverlay.className = 'video-loading-overlay';
+                    loadingOverlay.innerHTML = '<div class="loading-spinner"></div>';
+                    portfolioItem.appendChild(loadingOverlay);
+
+                    // Handle video loading states
+                    element.addEventListener('loadeddata', () => {
+                        loadingOverlay.style.display = 'none';
+                    });
                     
                     // Play/pause on hover for videos
-                    portfolioItem.addEventListener('mouseenter', () => element.play());
+                    portfolioItem.addEventListener('mouseenter', () => {
+                        element.play().catch(err => console.log('Playback prevented:', err));
+                    });
                     portfolioItem.addEventListener('mouseleave', () => {
                         element.pause();
                         element.currentTime = 0;

@@ -4,13 +4,15 @@
       "file": "en_1920x1080_FrontierMisubishi_nov2024_AxeTheTax_v1SMALL.mp4",
       "type": "video",
       "dimensions": "1920x1080",
-      "client": "Frontier Mitsubishi"
+      "client": "Frontier Mitsubishi",
+      "poster": "en_1920x1080_FrontierMisubishi_nov2024_AxeTheTax_v1SMALL_poster.jpg"
     },
     {
       "file": "en_1920x1080_FrontierMitsubishi_Oct2024_V1SMALL.mp4",
       "type": "video",
       "dimensions": "1920x1080",
-      "client": "Frontier Mitsubishi"
+      "client": "Frontier Mitsubishi",
+      "poster": "en_1920x1080_FrontierMitsubishi_Oct2024_V1SMALL_poster.jpg"
     },
     {
       "file": "en_300x250_AceShawarma_ButterChcikenTacos_aug2024_v1.jpg",
