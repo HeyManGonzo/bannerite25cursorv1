@@ -1,6 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadPortfolioItems();
+    setupEmailProtection();
 });
+
+function setupEmailProtection() {
+    const emailLinks = document.querySelectorAll('.contact-link');
+    emailLinks.forEach(link => {
+        // Encode the email parts
+        const user = 'question';
+        const domain = 'bannerite.com';
+        
+        // Update the link
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = `mailto:${user}@${domain}`;
+        });
+
+        // Update the text content
+        const emailText = link.querySelector('.email-text');
+        if (emailText) {
+            emailText.textContent = `${user}@${domain}`;
+        }
+    });
+}
 
 // Function to capture video frame and create poster
 async function createPosterFromVideo(video) {
